@@ -24,10 +24,9 @@ FROM nginx:alpine
 # Copy the build output from the react-build stage to the Nginx html directory
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Copy custom Nginx configuration (if any)
+# Copy custom Nginx configuration
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 80
 EXPOSE 80
 
 # Start Nginx server
