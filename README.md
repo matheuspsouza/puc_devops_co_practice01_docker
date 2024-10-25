@@ -1,7 +1,7 @@
 # puc_devops_co_practice01_docker
 
 ## Descrição
-Este projeto visa containerizar o projeto **GuessGame** e todas as suas dependências, criando uma imagem para o **Frontend** da aplicação, um para o **Backend** e um utilizando-se de uma imagem oficial para o database PostgreSQL.
+Este projeto visa containerizar o projeto **GuessGame** e todas as suas dependências, criando uma imagem para o **Frontend** da aplicação, um para o **Backend** e utilizando-se de uma imagem oficial para o banco de dados PostgreSQL.
 
 ## Estrutura
 A estrutura básica do repositório consiste em:
