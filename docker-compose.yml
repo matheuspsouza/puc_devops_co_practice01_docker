@@ -3,8 +3,12 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile
-    image: frontend:latest
+    image: frontend:${FRONTEND_VERSION}
     restart: always
+    environment:
+      BACKEND_HOST: ${BACKEND_HOST}
+      BACKEND_PORT: ${BACKEND_PORT}
+      BACKEND_PATH: ${BACKEND_PATH}
     ports:
       - "80:80"
     networks:
@@ -16,20 +20,20 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    image: backend:latest
+    image: backend:${BACKEND_VERSION}
     restart: always
     environment:
-      - FLASK_APP=${FLASK_APP}
-      - FLASK_DB_TYPE=${FLASK_DB_TYPE}
-      - FLASK_DB_USER=${FLASK_DB_USER}
-      - FLASK_DB_NAME=${FLASK_DB_NAME}
-      - FLASK_DB_PASSWORD=${FLASK_DB_PASSWORD}
-      - FLASK_DB_HOST=${FLASK_DB_HOST}
-      - FLASK_DB_PORT=${FLASK_DB_PORT}
+      FLASK_APP: ${FLASK_APP}
+      FLASK_DB_TYPE: ${FLASK_DB_TYPE}
+      FLASK_DB_USER: ${FLASK_DB_USER}
+      FLASK_DB_NAME: ${FLASK_DB_NAME}
+      FLASK_DB_PASSWORD: ${FLASK_DB_PASSWORD}
+      FLASK_DB_HOST: ${FLASK_DB_HOST}
+      FLASK_DB_PORT: ${FLASK_DB_PORT}
     expose:
     - "5000"
     deploy:
-      replicas: 2
+      replicas: ${BACKEND_REPLICAS}
     networks:
       - frontend-network
       - db-network

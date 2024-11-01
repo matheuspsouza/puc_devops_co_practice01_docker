@@ -2,14 +2,14 @@ events { }  # Needed to prevent startup check
 
 http {
     upstream backend {
-        server backend:5000;  #Backend service address
+        server ${BACKEND_HOST}:${BACKEND_PORT};  #Backend service address provided by env variables
     }
 
     server {
         listen 80;
 
-        location /api {
-            rewrite ^/api(/.*)$ $1 break; # Rewrite request removing the api
+        location ${BACKEND_PATH} {
+            rewrite ^${BACKEND_PATH}(/.*)$ $1 break; # Rewrite request removing the api
             proxy_pass http://backend;  # Route to backend
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
